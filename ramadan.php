@@ -25,7 +25,7 @@
 
     <section class="relative h-[60vh] flex items-center justify-center overflow-hidden bg-[#0f3460]">
         <div class="absolute inset-0 opacity-20">
-            <img src="https://images.unsplash.com/photo-1564121211835-e88c852648ab?q=80&w=1600" class="w-full h-full object-cover">
+            <img src="https://i.pinimg.com/1200x/aa/b6/61/aab661cab2d4c06176b1437a57c72fc8.jpg" class="w-full h-full object-cover">
         </div>
         <div class="relative text-center px-6">
             <span class="text-[#f4e4bc] font-black uppercase text-[10px] tracking-[0.5em] mb-4 block">Hiram Délices présente</span>
