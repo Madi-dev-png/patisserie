@@ -190,20 +190,19 @@
 
 </section>
  <footer class="bg-[#0f3460] text-[#f4e4bc] py-20 px-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <h4 class="font-playfair text-4xl font-black italic mb-4 uppercase">Hiram Délices</h4>
-            <div class="w-20 h-1 bg-[#f4e4bc] mx-auto mb-8"></div>
-            <div class="flex justify-center space-x-12 text-[10px] font-bold uppercase tracking-[0.3em]">
-                <a href="https://www.instagram.com/hiram_delices?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==    Coucou  
-J’espère que tu vas bien 🫶🏽 
-Peux-tu partager, aller liker et t'abonner ? 🙏🏽 
-Merciii d’avance 🫶🏽" class="hover:text-white">Instagram</a>
-                <a href="#" class="hover:text-white">Contact</a>
-                <a href="#" class="hover:text-white">Mentions</a>
-            </div>
-            <p class="mt-16 text-[9px] opacity-40 uppercase tracking-widest">&copy; 2026 Hiram Délices - Tous droits réservés</p>
+    <div class="max-w-7xl mx-auto text-center">
+        <h4 class="font-playfair text-4xl font-black italic mb-4 uppercase">Hiram Délices</h4>
+        <div class="w-20 h-1 bg-[#f4e4bc] mx-auto mb-8"></div>
+        <div class="flex justify-center flex-wrap gap-y-4 space-x-12 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <a href="https://www.instagram.com/hiram_delices" target="_blank" class="hover:text-white transition">Instagram</a>
+            
+            <a href="https://wa.me/2250717817965" target="_blank" class="hover:text-white transition">Contact</a>
+            
+            <a href="#" class="hover:text-white transition">Mentions</a>
         </div>
-    </footer>
+        <p class="mt-16 text-[9px] opacity-40 uppercase tracking-widest">&copy; 2026 Hiram Délices - Tous droits réservés</p>
+    </div>
+</footer>
 
     <script>
     function addToCart(nom, prix, img, id) {
