@@ -194,7 +194,10 @@
             <h4 class="font-playfair text-4xl font-black italic mb-4 uppercase">Hiram Délices</h4>
             <div class="w-20 h-1 bg-[#f4e4bc] mx-auto mb-8"></div>
             <div class="flex justify-center space-x-12 text-[10px] font-bold uppercase tracking-[0.3em]">
-                <a href="#" class="hover:text-white">Instagram</a>
+                <a href="https://www.instagram.com/hiram_delices?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==    Coucou  
+J’espère que tu vas bien 🫶🏽 
+Peux-tu partager, aller liker et t'abonner ? 🙏🏽 
+Merciii d’avance 🫶🏽" class="hover:text-white">Instagram</a>
                 <a href="#" class="hover:text-white">Contact</a>
                 <a href="#" class="hover:text-white">Mentions</a>
             </div>
