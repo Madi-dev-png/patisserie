@@ -11,7 +11,7 @@
     <div class="h-screen bg-[url('https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1920')] bg-cover bg-center flex items-center justify-center relative">
         <div class="absolute inset-0 bg-black/40"></div>
         <div class="relative z-10 text-center">
-            <h1 class="font-['Playfair_Display'] text-7xl md:text-9xl text-white italic mb-8">L'Exquise</h1>
+            <h1 class="font-['Playfair_Display'] text-7xl md:text-9xl text-white italic mb-8">Hiram</h1>
             <button onclick="document.getElementById('modal').classList.remove('hidden')" class="bg-amber-600 hover:bg-amber-700 text-white px-12 py-5 rounded-full font-bold transition transform hover:scale-110 shadow-2xl">
                 Se Connecter
             </button>
