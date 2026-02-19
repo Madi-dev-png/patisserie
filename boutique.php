@@ -392,6 +392,8 @@ $produits = $stmt->fetchAll();
             afficherNotification("Merci de remplir tous les champs !", "erreur");
             return;
         }
+
+        // 1. On envoie d'abord à la base de données via PHP
         fetch('passer_commande.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -400,7 +402,34 @@ $produits = $stmt->fetchAll();
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
-                afficherNotification("✨ Commande reçue ! À bientôt.", "succes");
+                
+                // --- DEBUT DE LA PARTIE WHATSAPP ---
+                // On prépare le texte du message
+                let texteWhatsApp = `*NOUVELLE COMMANDE - HIRAM DÉLICES*\n\n`;
+                texteWhatsApp += `*CLIENT :* ${infos.nom}\n`;
+                texteWhatsApp += `*TEL :* ${infos.tel}\n`;
+                texteWhatsApp += `*LIEU :* ${infos.lieu}\n`;
+                if(infos.precision) texteWhatsApp += `*PRECISION :* ${infos.precision}\n`;
+                texteWhatsApp += `*DATE :* ${infos.date}\n\n`;
+                texteWhatsApp += `* ARTICLES :*\n`;
+
+                let totalGlobal = 0;
+                panier.forEach(item => {
+                    let sousTotal = item.prix * item.qty;
+                    texteWhatsApp += `- ${item.qty}x ${item.nom} (${sousTotal.toLocaleString()} FCFA)\n`;
+                    totalGlobal += sousTotal;
+                });
+
+                texteWhatsApp += `\n*TOTAL : ${totalGlobal.toLocaleString()} FCFA*`;
+
+                // On génère l'URL WhatsApp (Numéro : 0717817965)
+                const lienWA = `https://wa.me/2250717817965?text=${encodeURIComponent(texteWhatsApp)}`;
+                
+                // On ouvre WhatsApp dans un nouvel onglet
+                window.open(lienWA, '_blank');
+                // --- FIN DE LA PARTIE WHATSAPP ---
+
+                afficherNotification("✨ Commande enregistrée et envoyée !", "succes");
                 panier = [];
                 // --- AJOUT : VIDER LE STOCKAGE AUSSI ---
                 localStorage.removeItem('panier_hiram');
