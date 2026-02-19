@@ -74,6 +74,9 @@ $produits = $stmt->fetchAll();
             <div class="hidden lg:flex items-center space-x-8 text-[10px] font-extrabold uppercase tracking-widest text-gray-800">
                 <a href="#" class="hover:text-[#0f3460] transition">Membres</a>
                 <a href="#" class="hover:text-[#0f3460] transition">Services</a>
+                <a href="ramadan.php" class="text-[#0f3460] font-bold uppercase text-[10px] tracking-widest hover:text-[#f4e4bc] transition">
+   🌙 Spécial Ramadan
+</a>
                 <div class="flex items-center group cursor-pointer">
                     <span class="hover:text-[#0f3460] transition">Pages</span>
                     <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2"></path></svg>
@@ -124,7 +127,7 @@ $produits = $stmt->fetchAll();
    <header class="relative min-h-[85vh] flex items-center overflow-hidden">
     
     <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=2000&auto=format&fit=crop" 
+        <img src="https://i.pinimg.com/736x/4c/bc/7b/4cbc7bc3bcd7b8c481e4f035c1936d64.jpg" 
              class="w-full h-full object-cover" 
              alt="Gâteau Hiram Délices">
         <div class="absolute inset-0 bg-gradient-to-r from-[#0f3460]/90 via-[#0f3460]/60 to-transparent"></div>
@@ -181,34 +184,75 @@ $produits = $stmt->fetchAll();
         </div>
     </div>
 </header>
-    <section class="max-w-7xl mx-auto py-24 px-6">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b-2 border-[#f4e4bc] pb-8">
-            <h3 class="font-playfair text-5xl font-black text-[#0f3460] uppercase tracking-tighter italic">Nos Créations</h3>
-            <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4 md:mt-0">Fait main avec passion</p>
-        </div>
+   <section id="nos-creations" class="max-w-7xl mx-auto py-24 px-6">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b-2 border-[#f4e4bc] pb-8">
+        <h3 class="font-playfair text-5xl font-black text-[#0f3460] uppercase tracking-tighter italic">La Carte Hiram</h3>
+        <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4 md:mt-0">Commandez au : 0717817965</p>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <?php foreach($produits as $p): 
-                $nom_securise = addslashes($p['nom']); 
-            ?>
-            <div class="group">
-                <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-[4/5] mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
-                    <img src="<?= $p['image_url'] ?>" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                    <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-xs font-bold text-[#f4e4bc]">
-                        <?= $p['prix'] ?> €
+    <?php 
+    // Configuration du menu selon ton image
+    $categories = [
+        "Saveurs Salées" => [
+            ['id' => 101, 'nom' => '10 Ailerons', 'prix' => 4500, 'img' => 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500'],
+            ['id' => 102, 'nom' => '10 Quiches', 'prix' => 6000, 'img' => 'https://i.pinimg.com/736x/5c/18/73/5c1873b72fdc8d9739fdbeaa1dc88113.jpg'],
+            ['id' => 103, 'nom' => '10 Burgers', 'prix' => 6000, 'img' => 'https://i.pinimg.com/1200x/91/9b/20/919b202e5d32027ce01983ca367b2fc3.jpg'],
+            ['id' => 104, 'nom' => '10 Nems', 'prix' => 3000, 'img' => 'https://i.pinimg.com/1200x/00/69/e6/0069e653e889112b095f93caed9a2738.jpg'],
+            ['id' => 105, 'nom' => '10 Samoussas', 'prix' => 4500, 'img' => 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500']
+        ],
+        "Collection Crêpes Signature" => [
+            ['id' => 201, 'nom' => '8 Crêpes Nature', 'prix' => 3000, 'img' => 'https://i.pinimg.com/736x/ba/ec/5d/baec5d221b0d12d324d0f7c43ffc4dd5.jpg'],
+            ['id' => 202, 'nom' => '8 Crêpes Chocolat', 'prix' => 4000, 'img' => 'https://i.pinimg.com/1200x/cf/ff/b7/cfffb77d0cb85c53b318ee6f5d53f5a9.jpg'],
+            ['id' => 203, 'nom' => '8 Crêpes Miel', 'prix' => 4000, 'img' => 'https://i.pinimg.com/736x/14/1e/5c/141e5c46a27c3a597336179eb0f7ec6b.jpg'],
+            ['id' => 204, 'nom' => '8 Crêpes Fourrées', 'prix' => 6500, 'img' => 'https://i.pinimg.com/1200x/fb/04/e6/fb04e6191c9971b42a7062e08c818adb.jpg']
+        ],
+        "Délices en Miniature" => [
+            ['id' => 301, 'nom' => '10 Beignets', 'prix' => 4000, 'img' => 'https://i.pinimg.com/736x/bf/51/ef/bf51ef1c410437db7f317f0cda04533f.jpg'],
+            ['id' => 302, 'nom' => '10 Mini Pizza', 'prix' => 4000, 'img' => 'https://i.pinimg.com/736x/34/f6/6b/34f66b66b25160a42874fd643bf36f67.jpg'],
+            ['id' => 303, 'nom' => '10 Pastels', 'prix' => 3000, 'img' => 'https://i.pinimg.com/736x/1f/cf/80/1fcf803447978920c19584f80b73890b.jpg'],
+            ['id' => 304, 'nom' => '10 Mini Sandwich', 'prix' => 4500, 'img' => 'https://i.pinimg.com/1200x/ed/f7/2b/edf72bf3fa9dc7667067f19cfd09897c.jpg'],
+            ['id' => 305, 'nom' => '10 Mini Tacos Viande', 'prix' => 4500, 'img' => 'https://i.pinimg.com/736x/5a/fd/83/5afd8349808ece4505e86a2ef91dc06b.jpg'],
+            ['id' => 306, 'nom' => '10 Mini Tacos Poulet', 'prix' => 4500, 'img' => 'https://i.pinimg.com/736x/60/80/78/608078a7afbb856ebbedf1cc6e73b02e.jpg'],
+            ['id' => 307, 'nom' => 'Naveyye viande', 'prix' => 4500, 'img' => 'https://i.pinimg.com/1200x/8a/92/33/8a923316cc8327e5414ede71c446bc12.jpg']
+        ],
+        "Boissons Faits Maison" => [
+            ['id' => 401, 'nom' => 'Bissap', 'prix' => 1500, 'img' => 'https://i.pinimg.com/736x/e1/be/f7/e1bef7c4a8e6b95a9e62b3dadf5206bb.jpg'],
+            ['id' => 402, 'nom' => 'Gnamankoudji', 'prix' => 2000, 'img' => 'https://i.pinimg.com/1200x/19/30/d5/1930d534161cac21d6c468b3df488c78.jpg'],
+            ['id' => 403, 'nom' => 'Degue', 'prix' => 3500, 'img' => 'https://i.pinimg.com/736x/4b/4a/0e/4b4a0e9dca04a84d941ddc0e5e3ccab5.jpg'],
+            ['id' => 404, 'nom' => 'Tomi', 'prix' => 2000, 'img' => 'https://i.pinimg.com/1200x/d6/fc/e4/d6fce40df4fb782a3e7ed2d5b5d32ff4.jpg']
+        ]
+    ];
+
+    foreach($categories as $catNom => $items): ?>
+        <div class="mb-20">
+            <h4 class="text-2xl font-black text-[#0f3460] mb-8 flex items-center uppercase tracking-widest">
+                <span class="bg-[#f4e4bc] w-10 h-10 rounded-full flex items-center justify-center mr-4 text-sm shadow-sm">#</span>
+                <?= $catNom ?>
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <?php foreach($items as $p): 
+                    $nom_securise = addslashes($p['nom']); 
+                ?>
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="<?= $p['img'] ?>" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            <?= number_format($p['prix'], 0, ',', ' ') ?> FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight"><?= $p['nom'] ?></h5>
+                        <button onclick="addToCart('<?= $nom_securise ?>', <?= $p['prix'] ?>, '<?= $p['img'] ?>', <?= $p['id'] ?>)" 
+                                class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">
+                            Ajouter au panier
+                        </button>
                     </div>
                 </div>
-                <div class="flex justify-between items-center px-2">
-                    <h4 class="font-playfair text-2xl font-bold text-[#0f3460]"><?= $p['nom'] ?></h4>
-                    <button onclick="addToCart('<?= $nom_securise ?>', <?= $p['prix'] ?>, '<?= $p['image_url'] ?>', <?= $p['id'] ?>)" 
-                            class="btn-hiram !py-2.5 !px-5 !text-[9px]">
-                        Ajouter
-                    </button>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
         </div>
-    </section>
+    <?php endforeach; ?>
+</section>
 
     <footer class="bg-[#0f3460] text-[#f4e4bc] py-20 px-6">
         <div class="max-w-7xl mx-auto text-center">
@@ -223,8 +267,19 @@ $produits = $stmt->fetchAll();
         </div>
     </footer>
 
-   <script>
-    let panier = [];
+  <script>
+    // --- AJOUT : RÉCUPÉRATION INITIALE DEPUIS LE STOCKAGE ---
+    // On vérifie si un panier existe déjà dans le navigateur (sauvegardé par ramadan.php)
+    let panier = JSON.parse(localStorage.getItem('panier_hiram')) || [];
+
+    // --- AJOUT : OUVERTURE AUTO SI REDIRECTION ---
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('openCart') === 'true') {
+            toggleCart(); // Ouvre ton sidebar actuel
+        }
+        updateUI(); // Rafraîchit ton interface avec les box récupérées
+    };
 
     function toggleCart() {
         const sidebar = document.getElementById('cart-sidebar');
@@ -242,6 +297,8 @@ $produits = $stmt->fetchAll();
             panier.push({ id, nom, prix, img, qty: 1 });
         }
         updateUI();
+        // Optionnel : afficher notification lors de l'ajout
+        afficherNotification("Ajouté : " + nom, "succes");
     }
 
     function updateQty(id, delta) {
@@ -259,6 +316,10 @@ $produits = $stmt->fetchAll();
     }
 
     function updateUI() {
+        // --- AJOUT : SAUVEGARDE SYSTÉMATIQUE ---
+        // On enregistre à chaque changement pour que ramadan.php et boutique.php soient toujours synchronisés
+        localStorage.setItem('panier_hiram', JSON.stringify(panier));
+
         const content = document.getElementById('cart-content');
         const badge = document.getElementById('cart-badge');
         const totalDisplay = document.getElementById('cart-total');
@@ -271,11 +332,11 @@ $produits = $stmt->fetchAll();
                 total += item.prix * item.qty;
                 count += item.qty;
                 return `
-                    <div class="flex items-center space-x-4 bg-gray-50 p-4 rounded-3xl border border-gray-100">
+                    <div class="flex items-center space-x-4 bg-gray-50 p-4 rounded-3xl border border-gray-100 mb-3">
                         <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl shadow-sm">
                         <div class="flex-grow">
                             <h4 class="font-bold text-[#0f3460] text-xs uppercase">${item.nom}</h4>
-                            <p class="text-[#0f3460]/70 font-bold text-[10px]">${item.prix} €</p>
+                            <p class="text-[#0f3460]/70 font-bold text-[10px]">${item.prix.toLocaleString()} FCFA</p>
                             <div class="flex items-center space-x-3 mt-2">
                                 <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded-full bg-white flex items-center justify-center font-bold text-xs shadow-sm border border-gray-100">-</button>
                                 <span class="text-xs font-bold">${item.qty}</span>
@@ -287,30 +348,20 @@ $produits = $stmt->fetchAll();
             }).join('');
         }
         badge.innerText = count;
-        totalDisplay.innerText = total.toFixed(2) + " €";
+        totalDisplay.innerText = total.toLocaleString() + " FCFA";
     }
 
-    // --- TON SYSTÈME DE NOTIFICATION RÉINSTALLÉ ---
     function afficherNotification(message, type) {
         const node = document.createElement('div');
-        // On garde ta structure exacte, on adapte juste les couleurs au thème Hiram
         node.className = `fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-full shadow-2xl z-[100] transition-all duration-500 transform translate-y-20 opacity-0 font-bold text-sm tracking-widest uppercase`;
-        
         if (type === "succes") {
-            // Bleu et Or pour le succès
             node.classList.add('bg-[#0f3460]', 'text-[#f4e4bc]', 'border', 'border-[#f4e4bc]');
         } else {
-            // Rouge pour l'erreur
             node.classList.add('bg-red-600', 'text-white');
         }
-        
         node.innerText = message;
         document.body.appendChild(node);
-        
-        // Animation d'apparition
         setTimeout(() => node.classList.remove('translate-y-20', 'opacity-0'), 100);
-        
-        // Animation de disparition
         setTimeout(() => {
             node.classList.add('translate-y-20', 'opacity-0');
             setTimeout(() => node.remove(), 500);
@@ -319,18 +370,15 @@ $produits = $stmt->fetchAll();
 
     function validerCommande() {
         const form = document.getElementById('form-livraison');
-        
         if (panier.length === 0) {
             afficherNotification("Votre panier est vide !", "erreur");
             return;
         }
-
         if (form.classList.contains('hidden')) {
             form.classList.remove('hidden');
             afficherNotification("Veuillez remplir vos infos de livraison", "succes");
             return;
         }
-
         const infos = {
             nom: document.getElementById('nom_client').value,
             tel: document.getElementById('tel_client').value,
@@ -338,12 +386,10 @@ $produits = $stmt->fetchAll();
             precision: document.getElementById('precision_lieu').value,
             date: document.getElementById('date_livraison').value
         };
-
         if (!infos.nom || !infos.tel || !infos.lieu || !infos.date) {
             afficherNotification("Merci de remplir tous les champs !", "erreur");
             return;
         }
-
         fetch('passer_commande.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -354,6 +400,8 @@ $produits = $stmt->fetchAll();
             if (data.status === 'success') {
                 afficherNotification("✨ Commande reçue ! À bientôt.", "succes");
                 panier = [];
+                // --- AJOUT : VIDER LE STOCKAGE AUSSI ---
+                localStorage.removeItem('panier_hiram');
                 form.classList.add('hidden');
                 updateUI();
                 setTimeout(toggleCart, 1500);
