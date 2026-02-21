@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/boutique.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Boutique - Hiram Délices</title>
+    
+</head>
+<body class="bg-[#fafafa] font-['Poppins'] overflow-x-hidden">
+
+    <div class="bg-[#0f3460] text-[#f4e4bc] text-[10px] py-2 text-center font-bold uppercase tracking-[0.2em]">
+        PROFITEZ DE -50% SUR VOTRE PREMIÈRE COMMANDE
+    </div>
+
+    <nav class="px-10 py-4 bg-white sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Menu desktop gauche -->
+            <div class="hidden lg:flex items-center space-x-8 text-[10px] font-extrabold uppercase tracking-widest text-gray-800 flex-1">
+                <a href="#" class="hover:text-[#0f3460] transition">À Propos</a>
+                <div class="flex items-center group cursor-pointer">
+                    <span class="hover:text-[#0f3460] transition">Blog & Actus</span>
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2"></path></svg>
+                </div>
+                <a href="#" class="text-[#0f3460] border-b border-[#f4e4bc]">Notre Menu</a>
+            </div>
+
+            <!-- Logo central -->
+            <div class="flex-shrink-0 text-center px-10">
+                <h1 class="font-playfair text-xl font-black text-[#0f3460] leading-none uppercase">
+                    Hiram <br>
+                    <span class="text-[9px] tracking-[0.4em] font-bold text-gray-400">Délices</span>
+                </h1>
+            </div>
+
+            <!-- Menu desktop droit + icônes -->
+            <div class="flex items-center justify-end space-x-8 flex-1">
+                <div class="hidden lg:flex items-center space-x-8 text-[10px] font-extrabold uppercase tracking-widest text-gray-800">
+                    <a href="#" class="hover:text-[#0f3460] transition">Membres</a>
+                    <a href="#" class="hover:text-[#0f3460] transition">Services</a>
+                    <a href="ramadan.html" class="text-[#0f3460] font-bold uppercase text-[10px] tracking-widest hover:text-[#f4e4bc] transition">
+                        🌙 Spécial Ramadan
+                    </a>
+                    <div class="flex items-center group cursor-pointer">
+                        <span class="hover:text-[#0f3460] transition">Pages</span>
+                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Panier -->
+                <button onclick="toggleCart()" class="relative p-2 group ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 group-hover:text-[#0f3460] transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-badge" class="absolute top-0 right-0 bg-[#0f3460] text-[#f4e4bc] text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-sm">0</span>
+                </button>
+
+                <!-- Bouton hamburger mobile -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-gray-800 ml-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay et menu mobile (latéral gauche) -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 bg-white z-[70] shadow-2xl transform -translate-x-full transition-transform duration-300 p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-playfair text-xl font-black text-[#0f3460]">Menu</h3>
+            <button onclick="toggleMobileMenu()" class="text-gray-400 hover:text-black text-2xl">&times;</button>
+        </div>
+        <div class="flex flex-col space-y-4 text-[10px] font-extrabold uppercase tracking-widest text-gray-800">
+            <a href="#" class="hover:text-[#0f3460] transition">À Propos</a>
+            <a href="#" class="hover:text-[#0f3460] transition">Blog & Actus</a>
+            <a href="#" class="text-[#0f3460] border-b border-[#f4e4bc]">Notre Menu</a>
+            <a href="#" class="hover:text-[#0f3460] transition">Membres</a>
+            <a href="#" class="hover:text-[#0f3460] transition">Services</a>
+            <a href="ramadan.html" class="text-[#0f3460] font-bold hover:text-[#f4e4bc] transition">🌙 Spécial Ramadan</a>
+            <a href="#" class="hover:text-[#0f3460] transition">Pages</a>
+        </div>
+    </div>
+
+    <!-- Overlay et sidebar du panier -->
+    <div id="cart-overlay" class="fixed inset-0 bg-[#0f3460]/20 z-[60] hidden backdrop-blur-sm" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-[70] shadow-2xl cart-sidebar cart-closed flex flex-col border-l-4 border-[#f4e4bc]">
+        <!-- En-tête fixe -->
+        <div class="p-8 pb-4 border-b border-gray-100">
+            <div class="flex justify-between items-center">
+                <h2 class="font-playfair text-3xl font-black text-[#0f3460]">Ma Sélection</h2>
+                <button onclick="toggleCart()" class="text-gray-300 hover:text-black text-3xl">&times;</button>
+            </div>
+        </div>
+
+        <!-- Zone défilante : articles + formulaire -->
+        <div id="cart-scroll-area" class="flex-1 overflow-y-auto px-8 space-y-4">
+            <div id="cart-content"></div>
+            <div id="form-livraison" class="p-4 bg-[#fcf9f2] rounded-2xl space-y-3 hidden border border-[#f4e4bc]">
+                <h3 class="font-bold text-[10px] uppercase tracking-widest text-[#0f3460] mb-2">Détails de livraison</h3>
+                <input type="text" id="nom_client" placeholder="Nom complet" class="w-full p-3 rounded-xl border-gray-200 text-sm focus:ring-[#0f3460]">
+                <input type="text" id="lieu_livraison" placeholder="Ville / Quartier" class="w-full p-3 rounded-xl border-gray-200 text-sm focus:ring-[#0f3460]">
+                <textarea id="precision_lieu" placeholder="Précisions" class="w-full p-3 rounded-xl border-gray-200 text-sm focus:ring-[#0f3460]"></textarea>
+                <input type="text" id="tel_client" placeholder="Téléphone" class="w-full p-3 rounded-xl border-gray-200 text-sm focus:ring-[#0f3460]">
+                <input type="datetime-local" id="date_livraison" class="w-full p-3 rounded-xl border-gray-200 text-sm focus:ring-[#0f3460]">
+            </div>
+        </div>
+
+        <!-- Pied fixe (total + bouton) -->
+        <div class="p-8 pt-4 border-t border-gray-100">
+            <div class="flex justify-between items-center mb-6">
+                <span class="uppercase text-[10px] font-black text-gray-400 tracking-[0.2em]">Total</span>
+                <span id="cart-total" class="font-playfair text-3xl font-black text-[#0f3460]">0 FCFA</span>
+            </div>
+            <button onclick="validerCommande()" class="btn-hiram w-full py-4 shadow-xl">Finaliser la commande</button>
+        </div>
+    </div>
+
+    <!-- Header hero (identique) -->
+    <header class="relative min-h-[85vh] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.pinimg.com/736x/4c/bc/7b/4cbc7bc3bcd7b8c481e4f035c1936d64.jpg" class="w-full h-full object-cover" alt="Gâteau Hiram Délices">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0f3460]/90 via-[#0f3460]/60 to-transparent"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-10 w-full relative z-10">
+            <div class="lg:w-2/3 text-white">
+                <div class="flex items-center space-x-3 mb-6">
+                    <span class="h-[2px] w-12 bg-[#f4e4bc]"></span>
+                    <span class="uppercase text-[11px] font-black tracking-[0.4em] text-[#f4e4bc]">L'excellence artisanale</span>
+                </div>
+                <h2 class="font-playfair text-[5rem] lg:text-[8rem] leading-[0.85] font-black uppercase tracking-tighter text-white">
+                    L'Art de <br>
+                    <span class="text-[#f4e4bc] text-4xl lg:text-5xl font-normal lowercase tracking-normal italic block my-4">votre</span>
+                    Bonheur <br>
+                    <span class="text-white">Gourmand</span>
+                </h2>
+                <div class="mt-12 flex flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0 sm:space-x-10">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-[#f4e4bc] font-bold text-xs uppercase tracking-widest italic">Hiram Délices</span>
+                        <span class="h-[1px] w-12 bg-[#f4e4bc]/30"></span>
+                    </div>
+                    <button onclick="document.getElementById('nos-creations').scrollIntoView({behavior: 'smooth'})" class="bg-[#f4e4bc] text-[#0f3460] px-12 py-5 rounded-full text-[12px] font-black uppercase tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl transform hover:-translate-y-1">
+                        Découvrir la Boutique
+                    </button>
+                </div>
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-3 gap-8 border-t border-white/10 pt-10">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full border border-[#f4e4bc]/50 flex items-center justify-center text-[#f4e4bc]">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="3"></path></svg>
+                        </div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-white/80 leading-tight">100% Naturel <br><span class="text-[#f4e4bc]">Sans conservateurs</span></p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-full border border-[#f4e4bc]/50 flex items-center justify-center text-[#f4e4bc]">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="3"></path></svg>
+                        </div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-white/80 leading-tight">Fait Maison <br><span class="text-[#f4e4bc]">Avec Passion</span></p>
+                    </div>
+                    <div class="flex items-center space-x-4 hidden md:flex">
+                        <div class="w-10 h-10 rounded-full border border-[#f4e4bc]/50 flex items-center justify-center text-[#f4e4bc]">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="3"></path></svg>
+                        </div>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-white/80 leading-tight">Livraison <br><span class="text-[#f4e4bc]">Ultra Rapide</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="nos-creations" class="max-w-7xl mx-auto py-24 px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b-2 border-[#f4e4bc] pb-8">
+            <h3 class="font-playfair text-5xl font-black text-[#0f3460] uppercase tracking-tighter italic">La Carte Hiram</h3>
+            <p class="text-gray-400 font-bold uppercase text-[10px] tracking-widest mt-4 md:mt-0">Commandez au : 0717817965</p>
+        </div>
+
+        <!-- Catégorie Saveurs Salées -->
+        <div class="mb-20">
+            <h4 class="text-2xl font-black text-[#0f3460] mb-8 flex items-center uppercase tracking-widest">
+                <span class="bg-[#f4e4bc] w-10 h-10 rounded-full flex items-center justify-center mr-4 text-sm shadow-sm">#</span>
+                Saveurs Salées
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 10 Ailerons -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Ailerons</h5>
+                        <button onclick="addToCart('10 Ailerons', 4500, 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500', 101)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Quiches -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/5c/18/73/5c1873b72fdc8d9739fdbeaa1dc88113.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            6 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Quiches</h5>
+                        <button onclick="addToCart('10 Quiches', 6000, 'https://i.pinimg.com/736x/5c/18/73/5c1873b72fdc8d9739fdbeaa1dc88113.jpg', 102)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Burgers -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/91/9b/20/919b202e5d32027ce01983ca367b2fc3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            6 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Burgers</h5>
+                        <button onclick="addToCart('10 Burgers', 6000, 'https://i.pinimg.com/1200x/91/9b/20/919b202e5d32027ce01983ca367b2fc3.jpg', 103)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Nems -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/00/69/e6/0069e653e889112b095f93caed9a2738.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            3 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Nems</h5>
+                        <button onclick="addToCart('10 Nems', 3000, 'https://i.pinimg.com/1200x/00/69/e6/0069e653e889112b095f93caed9a2738.jpg', 104)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Samoussas -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Samoussas</h5>
+                        <button onclick="addToCart('10 Samoussas', 4500, 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500', 105)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catégorie Collection Crêpes Signature -->
+        <div class="mb-20">
+            <h4 class="text-2xl font-black text-[#0f3460] mb-8 flex items-center uppercase tracking-widest">
+                <span class="bg-[#f4e4bc] w-10 h-10 rounded-full flex items-center justify-center mr-4 text-sm shadow-sm">#</span>
+                Collection Crêpes Signature
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 8 Crêpes Nature -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/ba/ec/5d/baec5d221b0d12d324d0f7c43ffc4dd5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            3 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">8 Crêpes Nature</h5>
+                        <button onclick="addToCart('8 Crêpes Nature', 3000, 'https://i.pinimg.com/736x/ba/ec/5d/baec5d221b0d12d324d0f7c43ffc4dd5.jpg', 201)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 8 Crêpes Chocolat -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/cf/ff/b7/cfffb77d0cb85c53b318ee6f5d53f5a9.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">8 Crêpes Chocolat</h5>
+                        <button onclick="addToCart('8 Crêpes Chocolat', 4000, 'https://i.pinimg.com/1200x/cf/ff/b7/cfffb77d0cb85c53b318ee6f5d53f5a9.jpg', 202)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 8 Crêpes Miel -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/14/1e/5c/141e5c46a27c3a597336179eb0f7ec6b.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">8 Crêpes Miel</h5>
+                        <button onclick="addToCart('8 Crêpes Miel', 4000, 'https://i.pinimg.com/736x/14/1e/5c/141e5c46a27c3a597336179eb0f7ec6b.jpg', 203)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 8 Crêpes Fourrées -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/fb/04/e6/fb04e6191c9971b42a7062e08c818adb.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            6 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">8 Crêpes Fourrées</h5>
+                        <button onclick="addToCart('8 Crêpes Fourrées', 6500, 'https://i.pinimg.com/1200x/fb/04/e6/fb04e6191c9971b42a7062e08c818adb.jpg', 204)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catégorie Délices en Miniature -->
+        <div class="mb-20">
+            <h4 class="text-2xl font-black text-[#0f3460] mb-8 flex items-center uppercase tracking-widest">
+                <span class="bg-[#f4e4bc] w-10 h-10 rounded-full flex items-center justify-center mr-4 text-sm shadow-sm">#</span>
+                Délices en Miniature
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 10 Beignets -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/bf/51/ef/bf51ef1c410437db7f317f0cda04533f.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Beignets</h5>
+                        <button onclick="addToCart('10 Beignets', 4000, 'https://i.pinimg.com/736x/bf/51/ef/bf51ef1c410437db7f317f0cda04533f.jpg', 301)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Mini Pizza -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/34/f6/6b/34f66b66b25160a42874fd643bf36f67.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Mini Pizza</h5>
+                        <button onclick="addToCart('10 Mini Pizza', 4000, 'https://i.pinimg.com/736x/34/f6/6b/34f66b66b25160a42874fd643bf36f67.jpg', 302)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Pastels -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/1f/cf/80/1fcf803447978920c19584f80b73890b.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            3 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Pastels</h5>
+                        <button onclick="addToCart('10 Pastels', 3000, 'https://i.pinimg.com/736x/1f/cf/80/1fcf803447978920c19584f80b73890b.jpg', 303)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Mini Sandwich -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/ed/f7/2b/edf72bf3fa9dc7667067f19cfd09897c.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Mini Sandwich</h5>
+                        <button onclick="addToCart('10 Mini Sandwich', 4500, 'https://i.pinimg.com/1200x/ed/f7/2b/edf72bf3fa9dc7667067f19cfd09897c.jpg', 304)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Mini Tacos Viande -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/5a/fd/83/5afd8349808ece4505e86a2ef91dc06b.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Mini Tacos Viande</h5>
+                        <button onclick="addToCart('10 Mini Tacos Viande', 4500, 'https://i.pinimg.com/736x/5a/fd/83/5afd8349808ece4505e86a2ef91dc06b.jpg', 305)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- 10 Mini Tacos Poulet -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/60/80/78/608078a7afbb856ebbedf1cc6e73b02e.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">10 Mini Tacos Poulet</h5>
+                        <button onclick="addToCart('10 Mini Tacos Poulet', 4500, 'https://i.pinimg.com/736x/60/80/78/608078a7afbb856ebbedf1cc6e73b02e.jpg', 306)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- Naveyye viande -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/8a/92/33/8a923316cc8327e5414ede71c446bc12.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            4 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">Naveyye viande</h5>
+                        <button onclick="addToCart('Naveyye viande', 4500, 'https://i.pinimg.com/1200x/8a/92/33/8a923316cc8327e5414ede71c446bc12.jpg', 307)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catégorie Boissons Faits Maison -->
+        <div class="mb-20">
+            <h4 class="text-2xl font-black text-[#0f3460] mb-8 flex items-center uppercase tracking-widest">
+                <span class="bg-[#f4e4bc] w-10 h-10 rounded-full flex items-center justify-center mr-4 text-sm shadow-sm">#</span>
+                Boissons Faits Maison
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Bissap -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/e1/be/f7/e1bef7c4a8e6b95a9e62b3dadf5206bb.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            1 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">Bissap</h5>
+                        <button onclick="addToCart('Bissap', 1500, 'https://i.pinimg.com/736x/e1/be/f7/e1bef7c4a8e6b95a9e62b3dadf5206bb.jpg', 401)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- Gnamankoudji -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/19/30/d5/1930d534161cac21d6c468b3df488c78.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            2 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">Gnamankoudji</h5>
+                        <button onclick="addToCart('Gnamankoudji', 2000, 'https://i.pinimg.com/1200x/19/30/d5/1930d534161cac21d6c468b3df488c78.jpg', 402)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- Degue -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/736x/4b/4a/0e/4b4a0e9dca04a84d941ddc0e5e3ccab5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            3 500 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">Degue</h5>
+                        <button onclick="addToCart('Degue', 3500, 'https://i.pinimg.com/736x/4b/4a/0e/4b4a0e9dca04a84d941ddc0e5e3ccab5.jpg', 403)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+                <!-- Tomi -->
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-[2.5rem] bg-gray-50 aspect-square mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100">
+                        <img src="https://i.pinimg.com/1200x/d6/fc/e4/d6fce40df4fb782a3e7ed2d5b5d32ff4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute top-6 left-6 bg-[#0f3460] px-4 py-1.5 rounded-full text-[10px] font-black text-[#f4e4bc] border border-[#f4e4bc]">
+                            2 000 FCFA
+                        </div>
+                    </div>
+                    <div class="flex flex-col px-2">
+                        <h5 class="font-playfair text-lg font-bold text-[#0f3460] mb-3 leading-tight">Tomi</h5>
+                        <button onclick="addToCart('Tomi', 2000, 'https://i.pinimg.com/1200x/d6/fc/e4/d6fce40df4fb782a3e7ed2d5b5d32ff4.jpg', 404)" class="btn-hiram !py-3 !text-[10px] w-full uppercase tracking-widest font-black">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (identique) -->
+    <footer class="bg-[#0f3460] text-[#f4e4bc] py-20 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h4 class="font-playfair text-4xl font-black italic mb-4 uppercase">Hiram Délices</h4>
+            <div class="w-20 h-1 bg-[#f4e4bc] mx-auto mb-8"></div>
+            <div class="flex justify-center flex-wrap gap-y-4 space-x-12 text-[10px] font-bold uppercase tracking-[0.3em]">
+                <a href="https://www.instagram.com/hiram_delices" target="_blank" class="hover:text-white transition">Instagram</a>
+                <a href="https://wa.me/2250717817965" target="_blank" class="hover:text-white transition">Contact</a>
+                <a href="#" class="hover:text-white transition">Mentions</a>
+            </div>
+            <p class="mt-16 text-[9px] opacity-40 uppercase tracking-widest">&copy; 2026 Hiram Délices - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="js/boutique.js"></script>
+</body>
+</html>

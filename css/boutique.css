@@ -1,0 +1,28 @@
+        :root {
+            --hiram-blue: #0f3460;
+            --hiram-gold: #f4e4bc;
+            --hiram-white: #ffffff;
+        }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .cart-sidebar { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cart-open { transform: translateX(0); }
+        .cart-closed { transform: translateX(100%); }
+        
+        .btn-hiram {
+            background-color: var(--hiram-blue);
+            color: var(--hiram-gold);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .btn-hiram:hover {
+            background-color: white;
+            color: var(--hiram-blue);
+            border-color: var(--hiram-blue);
+            transform: translateY(-2px);
+        }

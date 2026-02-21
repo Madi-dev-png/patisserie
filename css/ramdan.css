@@ -1,0 +1,13 @@
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .btn-hiram {
+            background: #0f3460;
+            color: #f4e4bc;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+        .btn-hiram:hover { transform: scale(1.05); background: #16447a; }
